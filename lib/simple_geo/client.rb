@@ -105,6 +105,12 @@ module SimpleGeo
         HashUtils.symbolize_keys geojson_hash['properties']
       end
 
+      def geocode_address(address)
+        geojson_hash = get Endpoint.geocode(address)
+        geojson_hash = HashUtils.recursively_symbolize_keys(geojson_hash)
+        geojson_hash[:features][0]
+      end
+
       def get_layer_information(layer)
         layer_info = get Endpoint.layer(layer)
         layer_info.delete('selfLink')

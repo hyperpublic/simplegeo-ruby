@@ -36,6 +36,10 @@ module SimpleGeo
         endpoint_url "nearby/address/#{lat},#{lon}.json"
       end
 
+      def geocode(address)
+        endpoint_url "geocode/address.json?q=#{Endpoint.escape_uri(address)}"
+      end
+
       def density(lat, lon, day, hour=nil)
         if hour.nil?
           path = "density/#{day}/#{lat},#{lon}.json"
@@ -71,6 +75,10 @@ module SimpleGeo
 
       def endpoint_url(path)
         [REALM, API_VERSION, path].join('/')
+      end
+
+      def escape_uri(param)
+        URI.escape(param, Regexp.new("[^#{URI::PATTERN::UNRESERVED}]"))
       end
     end
 
