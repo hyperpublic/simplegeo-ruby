@@ -24,8 +24,14 @@ module SimpleGeo
       #Places API
       def get_places(location, options={})
         endpoint = Endpoint.places(location, options)
-        feature_hash = get endpoint
-        HashUtils.recursively_symbolize_keys(feature_hash)[:features] if feature_hash["features"]
+        features_hash = get endpoint
+        features_hash = HashUtils.recursively_symbolize_keys(features_hash)[:features] if features_hash["features"]
+        #parse out the properties for each feature
+        result = []
+        features_hash.each do |feature|
+          result << feature[:properties]
+        end
+        result
       end
 
       #Storage API
