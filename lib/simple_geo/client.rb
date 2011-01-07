@@ -21,6 +21,14 @@ module SimpleGeo
         @@debug
       end
 
+      #Places API
+      def get_places(location, options={})
+        endpoint = Endpoint.places(location, options)
+        feature_hash = get endpoint
+        HashUtils.recursively_symbolize_keys(feature_hash)[:features] if feature_hash["features"]
+      end
+
+      #Storage API
       def add_record(record)
         raise SimpleGeoError, "Record has no layer"  if record.layer.nil?
         put Endpoint.record(record.layer, record.id), record

@@ -2,14 +2,14 @@ require 'uri'
 require 'json'
 require 'oauth'
 
-require 'simple_geo/hash_utils'
-require 'simple_geo/connection'
-require 'simple_geo/endpoint'
-require 'simple_geo/client'
-require 'simple_geo/record'
+#require 'simple_geo/hash_utils'
+#require 'simple_geo/connection'
+#require 'simple_geo/endpoint'
+#require 'simple_geo/client'
+#require 'simple_geo/record'
 
 module SimpleGeo
-  API_VERSION = '0.1'.freeze
+  API_VERSION = '1.0'.freeze
   REALM = "http://api.simplegeo.com"
   VERSION = File.read(File.join(File.dirname(__FILE__), '..', 'VERSION'))
 
@@ -21,3 +21,11 @@ module SimpleGeo
   class DecodeError < SimpleGeoError; end
   class NoConnectionEstablished < SimpleGeoError; end
 end
+
+directory = File.expand_path(File.dirname(__FILE__))
+
+require File.join(directory, 'simple_geo', 'hash_utils')
+require File.join(directory, 'simple_geo', 'connection')
+require File.join(directory, 'simple_geo', 'endpoint')
+require File.join(directory, 'simple_geo', 'client')
+require File.join(directory, 'simple_geo', 'record')

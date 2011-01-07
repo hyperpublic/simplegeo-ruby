@@ -3,6 +3,30 @@ module SimpleGeo
   class Endpoint
 
     class << self
+      def places(location, options={})
+        params_str = ""
+        options.each do |k,v|
+          params_str << "#{k}=#{v}&"
+        end
+
+        query_str = case
+          when location[:lat] && location[:lon] 
+            then "places/#{location[:lat]},#{location[:lon]}.json?#{params_str}"
+          when location[:address]
+            then 
+              begin
+                params_str = "address=#{location[:address]}&" + params_str
+                "places/address.json?#{params_str}"
+              end
+          when location[:ip]
+            then "places/#{location[:ip]}.json?#{params_str}"
+          else
+            "places/ip.json?#{params_str}"
+        end
+
+        endpoint_url query_str.chop!
+      end
+
       def record(layer, id)
         endpoint_url "records/#{layer}/#{id}.json"
       end
