@@ -29,7 +29,8 @@ module SimpleGeo
         #parse out the properties for each feature
         result = []
         features_hash.each do |feature|
-          result << feature[:properties]
+          properties = feature.delete(:properties)
+          result << properties.merge(feature)
         end
         result
       end
