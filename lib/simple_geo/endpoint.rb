@@ -24,7 +24,7 @@ module SimpleGeo
             "places/ip.json?#{params_str}"
         end
 
-        endpoint_url query_str.chop!
+        endpoint_url URI::escape(query_str.chop!)
       end
 
       def record(layer, id)
