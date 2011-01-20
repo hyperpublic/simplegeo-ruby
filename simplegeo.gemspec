@@ -4,13 +4,13 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{sg-ruby}
-  s.version = "0.1.0"
+  s.name = %q{simplegeo}
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Dan Dofter"]
-  s.date = %q{2010-05-12}
-  s.email = %q{dan@dofter.com}
+  s.authors = ["Brian Ryckbost", "Andrew Mager"]
+  s.date = %q{2011-01-12}
+  s.email = %q{andrew@simplegeo.com}
   s.extra_rdoc_files = [
     "LICENSE",
      "README.rdoc"
@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
      "lib/simple_geo/hash_utils.rb",
      "lib/simple_geo/record.rb",
      "lib/simplegeo.rb",
-     "sg-ruby.gemspec",
+     "simplegeo.gemspec",
      "spec/client_spec.rb",
      "spec/fixtures/contains.json",
      "spec/fixtures/get_density_by_day.json",
@@ -46,7 +46,7 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
-  s.homepage = %q{http://github.com/archfear/sg-ruby}
+  s.homepage = %q{http://github.com/simplegeo/simplegeo-ruby}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}

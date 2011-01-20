@@ -59,6 +59,26 @@ module SimpleGeo
       def nearby_address(lat, lon)
         endpoint_url "nearby/address/#{lat},#{lon}.json"
       end
+      
+      def context(lat, lon)
+        endpoint_url "context/#{lat},#{lon}.json", '1.0'
+      end
+      
+      def context_ip(ip)
+        endpoint_url "context/#{ip}.json", '1.0'
+      end
+      
+      def places(lat, lon, options)
+        if options.empty?
+          endpoint_url "places/#{lat},#{lon}.json", '1.0'
+        else
+          params = ""
+          options.each do |k,v|
+            params << "#{k}=#{v}&"
+          end
+          endpoint_url "places/#{lat},#{lon}.json?#{params.chop!}", '1.0'
+        end
+      end
 
       def geocode(address)
         endpoint_url "geocode/address.json?q=#{Endpoint.escape_uri(address)}"
@@ -71,10 +91,6 @@ module SimpleGeo
           path = "density/#{day}/#{hour}/#{lat},#{lon}.json"
         end
         endpoint_url path
-      end
-
-      def layer(layer)
-        endpoint_url "layer/#{layer}.json"
       end
 
       def contains(lat, lon)
@@ -93,12 +109,8 @@ module SimpleGeo
         endpoint_url "boundary/#{id}.json"
       end
 
-      def locate(ip)
-        endpoint_url "locate/#{ip}.json"
-      end
-
-      def endpoint_url(path)
-        [REALM, API_VERSION, path].join('/')
+      def endpoint_url(path, version = API_VERSION)
+        [REALM, version, path].join('/')
       end
 
       def escape_uri(param)
