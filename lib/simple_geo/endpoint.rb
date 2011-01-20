@@ -69,7 +69,7 @@ module SimpleGeo
       end
       
       def context_address(address)
-        endpoint_url "context/address.json?address=#{address}", '1.0'
+        endpoint_url "context/address.json?address=#{Endpoint.escape_uri(address)}", '1.0'
       end
       
       def places(lat, lon, options)
